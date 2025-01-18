@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 pragma solidity ^0.8.18;
 
-import {console2} from "forge-std/console2.sol";
+import {console2} from "lib/forge-std/src/console2.sol";
 
 abstract contract ZkSyncChainChecker {
     uint256 zkSyncMainnetChainId = 324;
@@ -10,8 +10,10 @@ abstract contract ZkSyncChainChecker {
 
     function isOnZkSyncChainId() public view returns (bool) {
         // We can make a "dummy" check by looking at the chainId, but this won't work for when working with foundry
-        return block.chainid == zkSyncMainnetChainId || block.chainid == zkSyncSepoliaChainId
-            || block.chainid == zkSyncInMemoryNodeChainId;
+        return
+            block.chainid == zkSyncMainnetChainId ||
+            block.chainid == zkSyncSepoliaChainId ||
+            block.chainid == zkSyncInMemoryNodeChainId;
     }
 
     function isOnZkSyncPrecompiles() public returns (bool isZkSync) {
